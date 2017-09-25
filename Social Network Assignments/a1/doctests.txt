@@ -1,0 +1,452 @@
+Trying:
+    sorted(approximate_betweenness(example_graph(), 2).items())
+Expecting:
+    [(('A', 'B'), 2.0), (('A', 'C'), 1.0), (('B', 'C'), 2.0), (('B', 'D'), 6.0), (('D', 'E'), 2.5), (('D', 'F'), 2.0), (('D', 'G'), 2.5), (('E', 'F'), 1.5), (('F', 'G'), 1.5)]
+ok
+Trying:
+    sorted(approximate_betweenness(example_graph(), 1).items())
+Expecting:
+    [(('A', 'B'), 1.0), (('A', 'C'), 1.0), (('B', 'C'), 1.0), (('B', 'D'), 1.0), (('D', 'E'), 1.0), (('D', 'F'), 1.0), (('D', 'G'), 1.0), (('E', 'F'), 1.0), (('F', 'G'), 1.0)]
+ok
+Trying:
+    node2distances, node2num_paths, node2parents = bfs(example_graph(), 'E', 5)
+Expecting nothing
+ok
+Trying:
+    sorted(node2distances.items())
+Expecting:
+    [('A', 3), ('B', 2), ('C', 3), ('D', 1), ('E', 0), ('F', 1), ('G', 2)]
+ok
+Trying:
+    sorted(node2num_paths.items())
+Expecting:
+    [('A', 1), ('B', 1), ('C', 1), ('D', 1), ('E', 1), ('F', 1), ('G', 2)]
+ok
+Trying:
+    sorted((node, sorted(parents)) for node, parents in node2parents.items())
+Expecting:
+    [('A', ['B']), ('B', ['D']), ('C', ['B']), ('D', ['E']), ('F', ['E']), ('G', ['D', 'F'])]
+ok
+Trying:
+    node2distances, node2num_paths, node2parents = bfs(example_graph(), 'E', 2)
+Expecting nothing
+ok
+Trying:
+    sorted(node2distances.items())
+Expecting:
+    [('B', 2), ('D', 1), ('E', 0), ('F', 1), ('G', 2)]
+ok
+Trying:
+    sorted(node2num_paths.items())
+Expecting:
+    [('B', 1), ('D', 1), ('E', 1), ('F', 1), ('G', 2)]
+ok
+Trying:
+    sorted((node, sorted(parents)) for node, parents in node2parents.items())
+Expecting:
+    [('B', ['D']), ('D', ['E']), ('F', ['E']), ('G', ['D', 'F'])]
+ok
+Trying:
+    node2distances, node2num_paths, node2parents = bfs(example_graph(), 'E', 1)
+Expecting nothing
+ok
+Trying:
+    sorted(node2distances.items())
+Expecting:
+    [('D', 1), ('E', 0), ('F', 1)]
+ok
+Trying:
+    sorted(node2num_paths.items())
+Expecting:
+    [('D', 1), ('E', 1), ('F', 1)]
+ok
+Trying:
+    sorted((node, sorted(parents)) for node, parents in node2parents.items())
+Expecting:
+    [('D', ['E']), ('F', ['E'])]
+ok
+Trying:
+    node2distances, node2num_paths, node2parents = bfs(example_graph(), 'E', 5)
+Expecting nothing
+ok
+Trying:
+    result = bottom_up('E', node2distances, node2num_paths, node2parents)
+Expecting nothing
+ok
+Trying:
+    sorted(result.items())
+Expecting:
+    [(('A', 'B'), 1.0), (('B', 'C'), 1.0), (('B', 'D'), 3.0), (('D', 'E'), 4.5), (('D', 'G'), 0.5), (('E', 'F'), 1.5), (('F', 'G'), 0.5)]
+ok
+Trying:
+    node2distances, node2num_paths, node2parents = bfs(example_graph(), 'E', 2)
+Expecting nothing
+ok
+Trying:
+    result = bottom_up('E', node2distances, node2num_paths, node2parents)
+Expecting nothing
+ok
+Trying:
+    sorted(result.items())
+Expecting:
+    [(('B', 'D'), 1.0), (('D', 'E'), 2.5), (('D', 'G'), 0.5), (('E', 'F'), 1.5), (('F', 'G'), 0.5)]
+ok
+Trying:
+    node2distances, node2num_paths, node2parents = bfs(example_graph(), 'E', 1)
+Expecting nothing
+ok
+Trying:
+    result = bottom_up('E', node2distances, node2num_paths, node2parents)
+Expecting nothing
+ok
+Trying:
+    sorted(result.items())
+Expecting:
+    [(('D', 'E'), 1.0), (('E', 'F'), 1.0)]
+ok
+Trying:
+    v = complexity_of_bfs(13, 23, 7)
+Expecting nothing
+ok
+Trying:
+    type(v) == int or type(v) == float
+Expecting:
+    True
+ok
+Trying:
+    cut(['A', 'B', 'C'], ['D', 'E', 'F', 'G'], example_graph())
+Expecting:
+    1
+ok
+Trying:
+    cut(['F', 'G'], ['A', 'B', 'C', 'D', 'E'], example_graph())
+Expecting:
+    3
+ok
+Trying:
+    cut(['E', 'F'], ['A', 'B', 'C', 'D', 'G'], example_graph())
+Expecting:
+    3
+ok
+Trying:
+    cut(['E'], ['A', 'B', 'C', 'D', 'F', 'G'], example_graph())
+Expecting:
+    2
+ok
+Trying:
+    evaluate([('D', 'E'), ('D', 'A')], example_graph())
+Expecting:
+    0.5
+ok
+Trying:
+    evaluate([('D', 'E'), ('D', 'A'), ('F', 'G')], example_graph())
+Expecting:
+    0.6666666666666666
+ok
+Trying:
+    evaluate([('D', 'E')], example_graph())
+Expecting:
+    1.0
+ok
+Trying:
+    evaluate([('D', 'E'), ('D', 'A'), ('F', 'G'), ('D', 'F')], example_graph())
+Expecting:
+    0.75
+ok
+Trying:
+    subgraph = get_subgraph(example_graph(), 3)
+Expecting nothing
+ok
+Trying:
+    sorted(subgraph.nodes())
+Expecting:
+    ['B', 'D', 'F']
+ok
+Trying:
+    len(subgraph.edges())
+Expecting:
+    2
+ok
+Trying:
+    subgraph = get_subgraph(example_graph(), 4)
+Expecting nothing
+ok
+Trying:
+    sorted(subgraph.nodes())
+Expecting:
+    ['D']
+ok
+Trying:
+    len(subgraph.edges())
+Expecting:
+    0
+ok
+Trying:
+    s = is_approximation_always_right()
+Expecting nothing
+ok
+Trying:
+    type(s)
+Expecting:
+    <class 'str'>
+ok
+Trying:
+    g = example_graph()
+Expecting nothing
+ok
+Trying:
+    train_graph = make_training_graph(g, 'D', 2)
+Expecting nothing
+ok
+Trying:
+    jaccard(train_graph, 'D', 2)
+Expecting:
+    [(('D', 'E'), 0.5), (('D', 'A'), 0.0)]
+ok
+Trying:
+    g = example_graph()
+Expecting nothing
+ok
+Trying:
+    train_graph = make_training_graph(g, 'B', 2)
+Expecting nothing
+ok
+Trying:
+    jaccard(train_graph, 'B', 3)
+Expecting:
+    [(('B', 'E'), 0.5), (('B', 'G'), 0.5), (('B', 'F'), 0.3333333333333333)]
+ok
+Trying:
+    g = example_graph()
+Expecting nothing
+ok
+Trying:
+    train_graph = make_training_graph(g, 'B', 1)
+Expecting nothing
+ok
+Trying:
+    jaccard(train_graph, 'B', 3)
+Expecting:
+    [(('B', 'A'), 0.5), (('B', 'E'), 0.3333333333333333), (('B', 'G'), 0.3333333333333333)]
+ok
+Trying:
+    g = example_graph()
+Expecting nothing
+ok
+Trying:
+    sorted(g.neighbors('D'))
+Expecting:
+    ['B', 'E', 'F', 'G']
+ok
+Trying:
+    train_graph = make_training_graph(g, 'D', 2)
+Expecting nothing
+ok
+Trying:
+    sorted(train_graph.neighbors('D'))
+Expecting:
+    ['F', 'G']
+ok
+Trying:
+    g = example_graph()
+Expecting nothing
+ok
+Trying:
+    sorted(g.neighbors('B'))
+Expecting:
+    ['A', 'C', 'D']
+ok
+Trying:
+    train_graph = make_training_graph(g, 'B', 2)
+Expecting nothing
+ok
+Trying:
+    sorted(train_graph.neighbors('B'))
+Expecting:
+    ['D']
+ok
+Trying:
+    g = example_graph()
+Expecting nothing
+ok
+Trying:
+    sorted(g.neighbors('F'))
+Expecting:
+    ['D', 'E', 'G']
+ok
+Trying:
+    train_graph = make_training_graph(g, 'F', 2)
+Expecting nothing
+ok
+Trying:
+    sorted(train_graph.neighbors('F'))
+Expecting:
+    ['G']
+ok
+Trying:
+    g = example_graph()
+Expecting nothing
+ok
+Trying:
+    sorted(g.neighbors('B'))
+Expecting:
+    ['A', 'C', 'D']
+ok
+Trying:
+    train_graph = make_training_graph(g, 'B', 1)
+Expecting nothing
+ok
+Trying:
+    sorted(train_graph.neighbors('B'))
+Expecting:
+    ['C', 'D']
+ok
+Trying:
+    g = example_graph()
+Expecting nothing
+ok
+Trying:
+    sorted(g.neighbors('G'))
+Expecting:
+    ['D', 'F']
+ok
+Trying:
+    train_graph = make_training_graph(g, 'G', 1)
+Expecting nothing
+ok
+Trying:
+    sorted(train_graph.neighbors('G'))
+Expecting:
+    ['F']
+ok
+Trying:
+    norm_cut(['A', 'B', 'C'], ['D', 'E', 'F', 'G'], example_graph())
+Expecting:
+    0.41666666666666663
+ok
+Trying:
+    norm_cut(['F', 'G'], ['A', 'B', 'C', 'D', 'E'], example_graph())
+Expecting:
+    1.125
+ok
+Trying:
+    components = partition_girvan_newman(example_graph(), 5)
+Expecting nothing
+ok
+Trying:
+    components = sorted(components, key=lambda x: sorted(x.nodes())[0])
+Expecting nothing
+ok
+Trying:
+    sorted(components[0].nodes())
+Expecting:
+    ['A', 'B', 'C']
+ok
+Trying:
+    sorted(components[1].nodes())
+Expecting:
+    ['D', 'E', 'F', 'G']
+ok
+Trying:
+    components = partition_girvan_newman(example_graph(), 3)
+Expecting nothing
+ok
+Trying:
+    components = sorted(components, key=lambda x: sorted(x.nodes())[0])
+Expecting nothing
+ok
+Trying:
+    sorted(components[0].nodes())
+Expecting:
+    ['A', 'B', 'C']
+ok
+Trying:
+    sorted(components[1].nodes())
+Expecting:
+    ['D', 'E', 'F', 'G']
+ok
+Trying:
+    components = partition_girvan_newman(example_graph(), 1)
+Expecting nothing
+ok
+Trying:
+    components = sorted(components, key=lambda x: sorted(x.nodes())[0])
+Expecting nothing
+ok
+Trying:
+    sorted(components[0].nodes())
+Expecting:
+    ['A']
+ok
+Trying:
+    sorted(components[1].nodes())
+Expecting:
+    ['B', 'C', 'D', 'E', 'F', 'G']
+ok
+Trying:
+    g = example_graph()
+Expecting nothing
+ok
+Trying:
+    train_graph = g.copy()
+Expecting nothing
+ok
+Trying:
+    train_graph.remove_edge(*('D', 'F'))
+Expecting nothing
+ok
+Trying:
+    path_score(train_graph, 'D', k=4, beta=.5)
+Expecting:
+    [(('D', 'F'), 0.5), (('D', 'A'), 0.25), (('D', 'C'), 0.25)]
+ok
+Trying:
+    volume(['A', 'B', 'C'], example_graph())
+Expecting:
+    4
+ok
+Trying:
+    volume(['B'], example_graph())
+Expecting:
+    3
+ok
+Trying:
+    volume(['D','E', 'F', 'G'], example_graph())
+Expecting:
+    6
+ok
+Trying:
+    volume(['B', 'D', 'G'], example_graph())
+Expecting:
+    7
+ok
+Trying:
+    volume(['F', 'G'], example_graph())
+Expecting:
+    4
+ok
+6 items had no tests:
+    a1
+    a1.download_data
+    a1.example_graph
+    a1.main
+    a1.read_graph
+    a1.score_max_depths
+14 items passed all tests:
+   2 tests in a1.approximate_betweenness
+  12 tests in a1.bfs
+   9 tests in a1.bottom_up
+   2 tests in a1.complexity_of_bfs
+   4 tests in a1.cut
+   4 tests in a1.evaluate
+   6 tests in a1.get_subgraph
+   2 tests in a1.is_approximation_always_right
+   9 tests in a1.jaccard
+  20 tests in a1.make_training_graph
+   2 tests in a1.norm_cut
+  12 tests in a1.partition_girvan_newman
+   4 tests in a1.path_score
+   5 tests in a1.volume
+93 tests in 20 items.
+93 passed and 0 failed.
+Test passed.

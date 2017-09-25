@@ -1,0 +1,42 @@
+Grade: 45.00/50.00
+
+1 Deduction(s):
+
+--------------
+#1: 5.00 points
+Failing test: test_vectorize_2: 
+        @points=5
+        
+Traceback (most recent call last):
+  File "../assignments-sol/a2/a2_test.py", line 95, in test_vectorize_2
+    [1])
+AssertionError: Lists differ: [0, 0, 0, 1, 0, 0] != [1]
+
+First differing element 0:
+0
+1
+
+First list contains 5 additional elements.
+First extra element 1:
+0
+
+- [0, 0, 0, 1, 0, 0]
++ [1]
+
+source:
+    def test_vectorize_2(self):
+         """
+         @points=5
+         """
+         docs = ["Isn't this movie great?", "Horrible, horrible movie"]
+         tokens_list = [tokenize(d) for d in docs]
+         feature_fns = [token_features]
+         X, vocab = vectorize(tokens_list, feature_fns, min_freq=2)
+         self.assertListEqual(list(X.toarray()[0]),
+                              [1])
+         self.assertListEqual(list(X.toarray()[1]),
+                              [1])
+         self.assertListEqual(sorted(vocab.items(), key=lambda x: x[1]),
+                              [('token=movie', 0)])
+--------------
+

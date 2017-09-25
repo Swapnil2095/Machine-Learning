@@ -1,0 +1,154 @@
+Trying:
+    feats = featurize(np.array(['i', 'LOVE', 'this', 'great', 'movie']), [token_features, lexicon_features])
+Expecting nothing
+ok
+Trying:
+    feats
+Expecting:
+    [('neg_words', 0), ('pos_words', 2), ('token=LOVE', 1), ('token=great', 1), ('token=i', 1), ('token=movie', 1), ('token=this', 1)]
+ok
+Trying:
+    feats = defaultdict(lambda: 0)
+Expecting nothing
+ok
+Trying:
+    lexicon_features(np.array(['i', 'LOVE', 'this', 'great', 'boring', 'movie']), feats)
+Expecting nothing
+ok
+Trying:
+    sorted(feats.items())
+Expecting:
+    [('neg_words', 1), ('pos_words', 2)]
+ok
+Trying:
+    feats = defaultdict(lambda: 0)
+Expecting nothing
+ok
+Trying:
+    token_features(['hi', 'there', 'hi'], feats)
+Expecting nothing
+ok
+Trying:
+    sorted(feats.items())
+Expecting:
+    [('token=hi', 2), ('token=there', 1)]
+ok
+Trying:
+    feats = defaultdict(lambda: 0)
+Expecting nothing
+ok
+Trying:
+    token_pair_features(np.array(['a', 'b', 'c', 'd']), feats)
+Expecting nothing
+ok
+Trying:
+    sorted(feats.items())
+Expecting:
+    [('token_pair=a__b', 1), ('token_pair=a__c', 1), ('token_pair=b__c', 2), ('token_pair=b__d', 1), ('token_pair=c__d', 1)]
+ok
+Trying:
+    feats = defaultdict(lambda: 0)
+Expecting nothing
+ok
+Trying:
+    token_pair_features(['a', 'b', 'a'], feats, 3)
+Expecting nothing
+ok
+Trying:
+    sorted(feats.items())
+Expecting:
+    [('token_pair=a__a', 1), ('token_pair=a__b', 1), ('token_pair=b__a', 1)]
+ok
+Trying:
+    feats = defaultdict(lambda: 0)
+Expecting nothing
+ok
+Trying:
+    token_pair_features(np.array(['a', 'b', 'c', 'd' ,'e']), feats)
+Expecting nothing
+ok
+Trying:
+    sorted(feats.items())
+Expecting:
+    [('token_pair=a__b', 1), ('token_pair=a__c', 1), ('token_pair=b__c', 2), ('token_pair=b__d', 1), ('token_pair=c__d', 2), ('token_pair=c__e', 1), ('token_pair=d__e', 1)]
+ok
+Trying:
+    tokenize("Hi there! Isn't this fun? ", keep_internal_punct=True)
+Expecting:
+    array(['hi', 'there', "isn't", 'this', 'fun'], 
+          dtype='<U5')
+ok
+Trying:
+    tokenize("??necronomicon?? geträumte sünden.<br>Hi", True)
+Expecting:
+    array(['necronomicon', 'geträumte', 'sünden.<br>hi'], 
+          dtype='<U13')
+ok
+Trying:
+    tokenize("??necronomicon?? geträumte sünden.<br>Hi", False)
+Expecting:
+    array(['necronomicon', 'geträumte', 'sünden', 'br', 'hi'], 
+          dtype='<U12')
+ok
+Trying:
+    tokenize(" Hi there! Isn't this fun?", keep_internal_punct=False)
+Expecting:
+    array(['hi', 'there', 'isn', 't', 'this', 'fun'], 
+          dtype='<U5')
+ok
+Trying:
+    docs = ["Isn't this movie great?", "Horrible, horrible movie"]
+Expecting nothing
+ok
+Trying:
+    tokens_list = [tokenize(d) for d in docs]
+Expecting nothing
+ok
+Trying:
+    feature_fns = [token_features] 
+Expecting nothing
+ok
+Trying:
+    X, vocab = vectorize(tokens_list, feature_fns, min_freq=1)
+Expecting nothing
+ok
+Trying:
+    type(X)
+Expecting:
+    <class 'scipy.sparse.csr.csr_matrix'>
+ok
+Trying:
+    X.toarray()
+Expecting:
+    array([[1, 0, 1, 1, 1, 1],
+           [0, 2, 0, 1, 0, 0]], dtype=int64)
+ok
+Trying:
+    sorted(vocab.items(), key=lambda x: x[1])
+Expecting:
+    [('token=great', 0), ('token=horrible', 1), ('token=isn', 2), ('token=movie', 3), ('token=t', 4), ('token=this', 5)]
+ok
+13 items had no tests:
+    a2
+    a2.accuracy_score
+    a2.cross_validation_accuracy
+    a2.download_data
+    a2.eval_all_combinations
+    a2.fit_best_classifier
+    a2.main
+    a2.mean_accuracy_per_setting
+    a2.parse_test_data
+    a2.plot_sorted_accuracies
+    a2.print_top_misclassified
+    a2.read_data
+    a2.top_coefs
+6 items passed all tests:
+   2 tests in a2.featurize
+   3 tests in a2.lexicon_features
+   3 tests in a2.token_features
+   9 tests in a2.token_pair_features
+   4 tests in a2.tokenize
+   7 tests in a2.vectorize
+28 tests in 19 items.
+28 passed and 0 failed.
+Test passed.

@@ -1,0 +1,24 @@
+	---Summary---
+Number of users collected: 11
+Average Number of Followers collected per user:500
+Number of messages collected: 5500
+Number of communities discovered: 5
+Number of cluster = 5
+Cluster0Size = 838
+Cluster1Size = 1080
+Cluster2Size = 500
+Cluster3Size = 1320
+Cluster4Size = 501
+Average number of users per community:847
+Number of Classes = 3
+Number of instances per class found: 
+Size of negative class = 2025
+Size of positive class = 1477
+Size of neutral class = 1998
+One example from each class:
+Top Positive Tweets ->
+(pos,neg) = (9,0) -> Tweet = RT @indraroy: Brilliant breaking story from @CNNIBNLive .... AAP MLA Kartar Singh doesnt disclose benami property worth crores. Super @bhup…
+Top Negative Tweets ->
+(pos,neg) = (0,8) -> Tweet = RT @madhukishwar: Yet another terror attack on army base, BUT Barkha Dutt @ndtv discussing futility of death penalty for convicted terroris…
+Top Neutral Tweets ->
+(pos,neg) = (4,4) -> Tweet = @vikramchandra @meerasanyal @NDTVProfit So basically India voted a gambler. If he fails Common man dies and suffers. Is he going to win ?

@@ -1,0 +1,128 @@
+Enter your responses inline below and push this file to your private GitHub
+repository.
+
+
+1. Assume I plan to use the friend_overlap function above to quantify the
+similarity of two users. E.g., because 344 is larger than 1, I conclude that
+Jill Stein and Gary Johnson are more similar than Hillary Clinton and Donald
+Trump.
+
+How is this approach misleading? How might you fix it?
+
+We can't conclude such type of similarity firmly by just looking at the number's similarity.
+
+According to me,
+I have other twitter data to check like-
+- What they liked on twitter
+- What they tweets
+- Whom and what they reply
+- Their photos, geolocations
+- Their profile information 
+
+Such more information about them may help to know their similarity more closely.
+
+
+
+
+2. Looking at the output of your followed_by_hillary_and_donald function, why
+do you think this user is followed by both Hilary Clinton and Donald Trump,
+who are rivals? Do some web searches to see if you can find out more
+information.
+
+Earvin Magic Johnson
+@MagicJohnson
+Id=248900032, 	Screen_Name=MagicJohnson, 	Name=Earvin Magic Johnson, 	Location=Los Angeles
+
+
+Information ->
+Earvin "Magic" Johnson Jr. (born August 14, 1959) is an American retired professional basketball player who played point guard for the Los Angeles Lakers of the National Basketball Association (NBA) for 13 seasons. 
+Johnson's career achievements include three NBA MVP Awards, nine NBA Finals appearances, twelve All-Star games, and ten All-NBA First and Second Team nominations. Johnson was honored as one of the 50 Greatest Players in NBA History in 1996.
+Since his retirement, Johnson has been an advocate for HIV/AIDS prevention and safe sex,[4] as well as an entrepreneur,[6] philanthropist,[7] broadcaster and motivational speaker.
+
+
+News- > source : http://www.tmz.com/2016/05/20/magic-johnson-donald-trump-hillary-clinton/
+despite the fact he's a HUGE Hillary Clinton supporter, Magic says he's still open to doing business with Donald Trump -- and wants to be friends with the guy -- as long as Hillary is president.
+
+My opinion -> 
+Johnson endorsed Clinton in political ground
+Also he is an entrepreneur and popular face, So he is connected with businessman Donald Trump for business
+
+
+
+
+
+
+3. There is a big difference in how many accounts each candidate follows (Gary
+Johnson follows over 3K accounts, while Donald Trump follows less than
+50). Why do you think this is? How might that affect our analysis?
+
+I thinks possibilities might be -
+- Gary Johnson is on twitter long before Donald Trump
+- Gary Johnson may be more social than Donald Trump on twitter
+- Gary Johnson may be more active listener and have long list of people to whom he thinks important to listen than Donald Trump on twitter
+- might be Donald Trump don't know how to use twitter effictively
+- Gary Johnson has different background and taste of people than Donald Trump
+- Donald Trump more busy than Gary Johnson and not finding enough time to check others status
+- Donald Trump only follows news related channels 
+
+This conclusions may  affect our analysis as followign ways-
+- We can't conclude from this who's political social network is strong and who's weak.
+- We can't conclude based on these numbers that candidate is more interested in only political fields. Might be he following those accounts belongs to different type of personalities.
+- Might be Donald Trump is more choosy in getting opinions from personalities, so he follows less people. May be he is more interested to get opinion face-to-face.
+may be he thinks that most of the people's tweets are not important for him. Many more posibilities. So because these posibilities, we don't get answers for all of them.
+
+We can't conclude any firm conclusion from this.
+
+
+
+
+
+4. The follower graph we've collected is incomplete. To expand it, we would
+have to also collect the list of accounts followed by each of the
+friends. That is, for each user X that Donald Trump follows, we would have to
+also collect all the users that X follows. Assuming we again use the API call
+https://dev.twitter.com/rest/reference/get/friends/ids, how many requests will
+we have to make? Given how Twitter does rate limiting
+(https://dev.twitter.com/rest/public/rate-limiting), approximately how many
+minutes will it take to collect this data?
+
+
+Consider,
+
+frieds_list = 100 { This list contains all friends such that for each user X that Donald Trump follows. }
+We have to made 100 different calls to collect all the users that X follows.
+
+So,
+No_of_Request= 100
+
+Each users that X follows may have <=5000 or >=5000 count
+
+For twitter,
+returned_data per call = 5000  {->means to move forwards through our dataset, via the next_cursor. To get the next batch of at least 5,000 results, perform the same request, but set the cursor to the value of the next_cursor.}
+
+Assume,
+50 user has <=5000 following count and other has >=5000 count
+
+So,
+No_of_Request= 100 + 50 + count_for_morethan_5000followings
+
+Now,
+count_for_morethan_5000followings is again depends upon how big is the list for each user
+
+Here We generalise and assume this is same for all remaining 50 friends, i.e. following_count= 10000
+request_count=10000/5000  = 2
+total_such_count= 2 * 50 = 100
+
+So,
+No_of_Request becomes => 100 + 50 + 100
+
+Furthermore,
+
+For 15 Minute Windows,
+{Rate limits are divided into 15 minute intervals. Additionally, all endpoints require authentication, so there is no concept of unauthenticated calls and rate limits.
+
+There are two initial buckets available for GET requests: 15 calls every 15 minutes, and 180 calls every 15 minutes.}
+
+time_required_in_min = No_of_Request/15 = 250/15 = 16.66 ~ 17 minutes
+
+Note that, here we ignored responce time by considering it negligibles
