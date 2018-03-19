@@ -1,0 +1,112 @@
+----------------------------------------------------------
+• Personnel information 
+----------------------------------------------------------
+Name -    Swapnil Sopan Gaikwad 
+CWID -    A20377532
+Email id- <sgaikwad@hawk.iit.edu> 
+
+-----------------------------------------------------------
+• Description 
+------------------------------------------------------------
+
+
+Data Analysis Theme-
+---------------------
+
+Try to find out network of Nes-Channels followed by common followers. 
+Here I am trying to find out which are the channels are there such that 
+these channel followed by many followers. I am trying to clustering them into 
+communities.
+
+Cluster them into 2 or more clusters according to their follower's connectivity.
+
+Then do sentimwnt analysis on the tweets which mentions News-Channels name in them to
+find out whether tweet is positive, negative or neutral as per summation of FINN database term values.
+
+
+Python Script Discriptions-
+---------------------------
+
+---------------------
+- `collect.py`: 
+---------------------
+
+This script collecting the data for analysis.
+I used NewsChannel list from 'NewChannel.txt' which contain scrrn_names of
+news-channels.
+For time-purposes, I just took 10-15 NewsChannels.
+Here I tried to build a graph by taking followers list (more than 500 per channel) of these news-channel.
+Also, I took tweets that mentions particular news-channel for classification purposes. 
+For analysis purpose, I just took 500 tweets per news-channel.
+
+In the last, I draw a graph of network.
+For understanding purposes, I also print their common followers count between 
+any two news-channel.
+
+---------------------
+- `cluster.py`: 
+---------------------
+
+This script read the data collected in the previous steps and 
+used girvan_newman community detection algorithm to cluster users into communities. 
+
+Here for time-issue, I just make 5 clusters.
+In the last, I draw a graph of clusters/communities.
+
+---------------------
+- `classify.py`: 
+---------------------
+
+This script classifys tweets collected per news-channel to classes - positive ,negative or neutral 
+as a sentiment classification.
+
+---------------------
+- `summarize.py`: 
+---------------------
+
+This script read the output of the previous methods to write a textfile 
+called `summary.txt` containing the following entries:
+
+  - Number of users collected:
+  - Average number of followers per user:
+  - Number of messages collected:
+  - Number of communities discovered:
+  - Average number of users per community:
+  - Number of instances per class found:
+  - One example from each class:
+
+
+-----------------------------------------------------------
+• Conclusions 
+------------------------------------------------------------
+
+Note - This summary is as per previos result.
+This can be different for next run.
+
+ 	---Summary---
+Number of users collected: 11
+Average Number of Followers collected per user:500
+Number of messages collected: 5500
+Number of communities discovered: 5
+Number of cluster = 5
+Cluster 0 Size = 838
+Cluster 1 Size = 1080
+Cluster 2 Size = 500
+Cluster 3 Size = 1320
+Cluster 4 Size = 501
+Average number of users per community:847
+Number of Classes = 3
+Number of instances per class found: 
+Size of negative class = 2025
+Size of positive class = 1477
+Size of neutral class = 1998
+One example from each class:
+Top Positive Tweets ->
+(pos,neg) = (9,0) -> Tweet = RT @indraroy: Brilliant breaking story from @CNNIBNLive .... AAP MLA Kartar Singh doesnt disclose benami property worth crores. Super @bhup…
+Top Negative Tweets ->
+(pos,neg) = (0,8) -> Tweet = RT @madhukishwar: Yet another terror attack on army base, BUT Barkha Dutt @ndtv discussing futility of death penalty for convicted terroris…
+Top Neutral Tweets ->
+(pos,neg) = (4,4) -> Tweet = @vikramchandra @meerasanyal @NDTVProfit So basically India voted a gambler. If he fails Common man dies and suffers. Is he going to win ? 
+
+
+

@@ -1,0 +1,12 @@
+TimesNow
+NewsX
+BBCBreaking
+cnnbrk
+WSJbreakingnews
+CNNIBNLive
+IndiaToday
+ndtv
+NDTVProfit
+NewsX
+ZeeNews
+airnewsalerts
